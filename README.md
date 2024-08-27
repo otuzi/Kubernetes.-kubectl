@@ -1,38 +1,5 @@
 # Домашнее задание к занятию «Kubernetes. Причины появления. Команда kubectl»
 
-### Инструкция к заданию
-
-1. Установка MicroK8S:
-    - sudo apt update,
-    - sudo apt install snapd,
-    - sudo snap install microk8s --classic,
-    - добавить локального пользователя в группу `sudo usermod -a -G microk8s $USER`,
-    - изменить права на папку с конфигурацией `sudo chown -f -R $USER ~/.kube`.
-
-2. Полезные команды:
-    - проверить статус `microk8s status --wait-ready`;
-    - подключиться к microK8s и получить информацию можно через команду `microk8s command`, например, `microk8s kubectl get nodes`;
-    - включить addon можно через команду `microk8s enable`; 
-    - список addon `microk8s status`;
-    - вывод конфигурации `microk8s config`;
-    - проброс порта для подключения локально `microk8s kubectl port-forward -n kube-system service/kubernetes-dashboard 10443:443`.
-
-3. Настройка внешнего подключения:
-    - отредактировать файл /var/snap/microk8s/current/certs/csr.conf.template
-    ```shell
-    # [ alt_names ]
-    # Add
-    # IP.4 = 123.45.67.89
-    ```
-    - обновить сертификаты `sudo microk8s refresh-certs --cert front-proxy-client.crt`.
-
-4. Установка kubectl:
-    - curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl;
-    - chmod +x ./kubectl;
-    - sudo mv ./kubectl /usr/local/bin/kubectl;
-    - настройка автодополнения в текущую сессию `bash source <(kubectl completion bash)`;
-    - добавление автодополнения в командную оболочку bash `echo "source <(kubectl completion bash)" >> ~/.bashrc`.
-
 ------
 
 ### Инструменты и дополнительные материалы, которые пригодятся для выполнения задания
@@ -49,11 +16,26 @@
 2. Установить dashboard.
 3. Сгенерировать сертификат для подключения к внешнему ip-адресу.
 
+Результат выполнение команды microk8s dashboard-proxy, для публикации Dashboard
+<img width="1287" alt="Screenshot 2024-08-27 at 23 04 41" src="https://github.com/user-attachments/assets/b8574a5a-4cb3-42ee-9c55-e78e2833503f">
+
+Сам dashboard:
+<img width="1692" alt="Screenshot 2024-08-27 at 23 06 07" src="https://github.com/user-attachments/assets/7f013305-1a2c-4515-a6cd-a24ac7edb265">
+
+
+
+
 ------
 
 ### Задание 2. Установка и настройка локального kubectl
 1. Установить на локальную машину kubectl.
 2. Настроить локально подключение к кластеру.
 3. Подключиться к дашборду с помощью port-forward.
+
+Команда port-forward
+<img width="913" alt="Screenshot 2024-08-27 at 23 08 08" src="https://github.com/user-attachments/assets/937828c0-f48a-4f77-aeaa-ea027ffba6bf">
+
+Результат:
+<img width="1692" alt="Screenshot 2024-08-27 at 23 06 07" src="https://github.com/user-attachments/assets/d5ca68a7-6b61-4c8c-be4f-200edf4a92ea">
 
 ------
